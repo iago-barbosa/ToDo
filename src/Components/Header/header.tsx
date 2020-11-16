@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Default from '../../Styles/Default';
 
-export default function Header({navigation}){
+export default function Header({navigation}: any){
     const route = useRoute();
     return(
         <View style={Default.header} >

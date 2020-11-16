@@ -17,11 +17,11 @@ export default function NavCategory() {
 
 // <Image source={require('../../../assets/')}></Image>
 
-function CustomDrawerComp ({navigation}:any) {
+function CustomDrawerComp ({navigation}: any) {
     return(
         <DrawerContentScrollView style={[Default.container]} >
             <View style={[Default.main, DrawerStyle.main]}>
-                <TouchableOpacity style={DrawerStyle.item} onPress={() => navigation.navigate('Cadastrar')}>
+                <TouchableOpacity style={DrawerStyle.item} onPress={() => navigation.navigate('Home')}>
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/list-today.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Hoje</Text>
                 </TouchableOpacity>
@@ -33,7 +33,7 @@ function CustomDrawerComp ({navigation}:any) {
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/calendar.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Em Breve</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[DrawerStyle.item, DrawerStyle.itemLast]}>
+                <TouchableOpacity style={[DrawerStyle.item, DrawerStyle.itemLast]} onPress={() => navigation.navigate('Cadastrar')}>
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/plus-solid.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Cadastrar Tarefa</Text>
                 </TouchableOpacity>
