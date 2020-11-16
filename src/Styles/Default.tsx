@@ -5,11 +5,12 @@ const Default = StyleSheet.create({
     main: {
         flex: 1,
         alignContent: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     container: {
         flex: 1,
         alignContent: 'center',
+        backgroundColor: '#2e2e2e'
     },
     buscaContainer: {
         flexDirection: 'row',
@@ -17,11 +18,22 @@ const Default = StyleSheet.create({
         backgroundColor: '#fff',
         borderBottomWidth: 1,
         borderColor: '#d3d3d3'
-        
     },
     icons: {
-        width: 30,
-        height: 30
+        width: 20,
+        height: 20
+    },
+    text: {
+        color: '#fff'
+    },
+    header:{
+        backgroundColor: '#2e2e2e',
+        height: 70,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        paddingBottom: 10,
+        paddingHorizontal: 25,
+        justifyContent: 'flex-end'
     },
 });
 
