@@ -10,7 +10,7 @@ const Default = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
-        backgroundColor: '#2e2e2e'
+        backgroundColor: '#282828'
     },
     buscaContainer: {
         flexDirection: 'row',
@@ -27,10 +27,10 @@ const Default = StyleSheet.create({
         color: '#fff'
     },
     header:{
-        backgroundColor: '#2e2e2e',
+        backgroundColor: '#1c1c1c',
         height: 70,
-        borderBottomWidth: 1,
-        borderColor: '#ccc',
+        //borderBottomWidth: 1,
+        //borderColor: '#ccc',
         paddingBottom: 10,
         paddingHorizontal: 25,
         justifyContent: 'flex-end'
