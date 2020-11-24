@@ -5,20 +5,18 @@ import CadastrarLembreteStyle from '../../Styles/CadastrarLembreteCSS';
 import DatePicker from 'react-native-datepicker';
 import api from '../../Service/api.js';
 
-export default function CadastrarTarefa ({navigation}:any) {
+export default function CadastrarLembrete ({navigation}:any) {
 
     const [titulo, setTitulo] = useState('');
-    const [data, setData] = useState('');
     const [sobre, setSobre] = useState('');
-    var current_date = new Date();
 
-    function cadastraTarefa(){
-        api.post('/cadastratarefas', 
+    function emBreve(){
+        var currentDate = new Date();
+        api.post('/cadastralembretes', 
             {
                 titulo: titulo,
                 texto: sobre,
-                dataCriacao: current_date,
-                dataEntrega: data,
+                data: currentDate,
                 status: "1"
             }).then((res:any) => {
                 navigation.navigate('Home')
@@ -40,32 +38,6 @@ export default function CadastrarTarefa ({navigation}:any) {
                 </View>
 
                 <View style={CadastrarLembreteStyle.inputItem}>
-                    <Text style={CadastrarLembreteStyle.text}>Prazo:</Text>
-                    <DatePicker 
-                            format="YYYY-MM-DD"
-                            style={CadastrarLembreteStyle.inputDate}
-                            mode="date"
-                            placeholder="select date"
-                            minDate={current_date}
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            date={data}
-                            customStyles={{
-                                dateIcon: {
-                                  position: 'absolute',
-                                  left: 0,
-                                  top: 4,
-                                  marginLeft: 0
-                                },
-                                dateInput: {
-                                    backgroundColor: '#fff'
-                                }
-                            }}
-                            onDateChange={(date) => {setData(date)}}
-                        />
-                </View>
-
-                <View style={CadastrarLembreteStyle.inputItem}>
                     <Text style={CadastrarLembreteStyle.text}>Conteudo da tarefa:</Text>
                     <TextInput
                         placeholder="Conteudo"
@@ -77,7 +49,7 @@ export default function CadastrarTarefa ({navigation}:any) {
                     ></TextInput>
                 </View>
 
-                <TouchableOpacity style={CadastrarLembreteStyle.button} onPress={cadastraTarefa}>
+                <TouchableOpacity style={CadastrarLembreteStyle.button}>
                     <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>

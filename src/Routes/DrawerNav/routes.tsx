@@ -25,7 +25,11 @@ function CustomDrawerComp ({navigation}: any) {
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/list-today.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Hoje</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={DrawerStyle.item}>
+                <TouchableOpacity style={[DrawerStyle.item, DrawerStyle.itemLast]} onPress={() => navigation.navigate('Lembretes')}>
+                    <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/post-it.png')}></Image>
+                    <Text style={[Default.text, DrawerStyle.itemText]}>Lembretes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={DrawerStyle.item} onPress={() => navigation.navigate('Amanha')}>
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/calendar-day.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Amanhã</Text>
                 </TouchableOpacity>

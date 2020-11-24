@@ -5,19 +5,35 @@ const {width} = Dimensions.get("window");
 
 const HomeStyle = StyleSheet.create({
     main: {
-        marginTop: 30,
-        marginHorizontal: 20,        
+        marginTop: 30,       
     },
     textWelcome: {
         fontSize: 28,
+        marginHorizontal: 20, 
     },
-    pieChart: {
-        width: width/2,
-        height: width/2,
-        alignSelf: 'flex-end',
-        marginTop: 20,
-        marginRight: 20
+    textWelcomeTarefas: {
+        fontSize: 22,
+        marginTop: 25,
+        marginHorizontal: 20, 
     },
+    containerTarefas: {
+        width: width,
+        marginTop: 10
+    },
+    item: {
+        height: 60,
+        paddingLeft: 20,
+        paddingRight: 60,
+        justifyContent: 'center',
+        borderBottomColor: '#000',
+        borderBottomWidth: 1
+    },
+    aberto: {
+        backgroundColor: '#0053a0'
+    },
+    concluido: {
+        backgroundColor: '#00a000'
+    }
 });
 
 export default HomeStyle;

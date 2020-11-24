@@ -5,7 +5,15 @@ const TarefasController = require("./controllers/TarefasController");
 
 routes.get('/tarefas', TarefasController.index);
 
+routes.get('/amanha', TarefasController.verAmanha);
+
+routes.get('/emBreve', TarefasController.emBreve);
+
 routes.post('/cadastratarefas', TarefasController.cadastraTarefa);
+
+routes.delete('/deletaTarefa', TarefasController.deletaTarefa);
+
+routes.put('/concluiTarefa', TarefasController.concluiTarefa);
 
 const LembretesController = require("./controllers/LembretesController");
 

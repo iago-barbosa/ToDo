@@ -1,59 +1,55 @@
 import React, { useState } from 'react';
 import {  View, Text, TextInput, TouchableOpacity} from 'react-native';
 import Default from '../../Styles/Default';
-import CadastrarStyle from '../../Styles/CadastrarCSS';
+import CadastrarLembreteStyle from '../../Styles/CadastrarLembreteCSS';
 import DatePicker from 'react-native-datepicker';
+import api from '../../Service/api.js';
 
-export default function Cadastrar () {
+export default function CadastrarLembrete ({navigation}) {
 
-    const [dataEntrega, setdataEntrega] = useState('');
+    const [titulo, setTitulo] = useState('');
+    const [sobre, setSobre] = useState('');
+
+    function cadastraLembrete(){
+        var currentDate = new Date();
+        api.post('/cadastralembretes', 
+            {
+                titulo: titulo,
+                texto: sobre,
+                data: currentDate,
+                status: "1"
+            }).then((res:any) => {
+                navigation.navigate('Home')
+        })
+    }
 
     return(
-        <View style={Default.main}>
-            <View style={Default.container}>
-                <View >
-                    <Text>Titulo da Tarefa:</Text>
+        <View style={CadastrarLembreteStyle.main}>
+            <View style={CadastrarLembreteStyle.container}>
+                <View style={CadastrarLembreteStyle.inputItem}>
+                    <Text style={CadastrarLembreteStyle.text}>Titulo da Tarefa:</Text>
                     <TextInput
-                        placeholder="titulo"
+                        style={CadastrarLembreteStyle.input}
+                        placeholderTextColor = "#fff"
+                        placeholder="Titulo"
+                        value={titulo}
+                        onChangeText={(text) => setTitulo(text)}
                     ></TextInput>
                 </View>
 
-                <View >
-                    <Text>Conteudo da tarefa:</Text>
+                <View style={CadastrarLembreteStyle.inputItem}>
+                    <Text style={CadastrarLembreteStyle.text}>Conteudo da tarefa:</Text>
                     <TextInput
-                        placeholder="texto"
+                        placeholder="Conteudo"
+                        multiline={true}
+                        placeholderTextColor = "#fff"
+                        value={sobre}
+                        style={[CadastrarLembreteStyle.input, {height: Math.max(35, 95)}]}
+                        onChangeText={(text) => setSobre(text)}
                     ></TextInput>
                 </View>
 
-                <View >
-                    <Text>Email:</Text>
-                    <TextInput
-                        placeholder="exemplo@exemplo.com"
-                    ></TextInput>
-                </View>
-
-                <View >
-                    <DatePicker 
-                        format="YYYY-MM-DD"
-                        mode="date"
-                        placeholder="select date"
-                        minDate="1900-01-01"
-                        maxDate="2007-01-01"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        date={dataEntrega}
-                        onDateChange={(date) => {setdataEntrega(date)}}
-                    />
-                </View>
-
-                <View >
-                    <Text>Sobre:</Text>
-                    <TextInput
-                        placeholder="exemplo@exemplo.com"
-                    ></TextInput>
-                </View>
-
-                <TouchableOpacity >
+                <TouchableOpacity style={CadastrarLembreteStyle.button} onPress={cadastraLembrete}>
                     <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>

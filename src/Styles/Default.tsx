@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const Default = StyleSheet.create({
     main: {
         flex: 1,
-        alignContent: 'center', 
+        alignContent: 'center',
         justifyContent: 'center',
     },
     container: {
@@ -26,7 +26,7 @@ const Default = StyleSheet.create({
     text: {
         color: '#fff'
     },
-    header:{
+    header: {
         backgroundColor: '#1c1c1c',
         height: 70,
         //borderBottomWidth: 1,
@@ -35,6 +35,12 @@ const Default = StyleSheet.create({
         paddingHorizontal: 25,
         justifyContent: 'flex-end'
     },
+    status: { 
+        position: 'absolute', 
+        right: 0, 
+        flex: 1, 
+        flexDirection: 'row', 
+    }
 });
 
 export default Default;
