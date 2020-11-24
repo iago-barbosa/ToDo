@@ -11,7 +11,7 @@ routes.get('/emBreve', TarefasController.emBreve);
 
 routes.post('/cadastratarefas', TarefasController.cadastraTarefa);
 
-routes.delete('/deletaTarefa', TarefasController.deletaTarefa);
+routes.post('/deletaTarefa', TarefasController.deletaTarefa);
 
 routes.put('/concluiTarefa', TarefasController.concluiTarefa);
 

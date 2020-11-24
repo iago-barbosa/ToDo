@@ -12,22 +12,31 @@ export default function Home ({navigation}:any) {
     const [id, setId] = useState({});
 
     function conclui(_id:any){
-        api.post('/concluiTarefa', {_id: _id}).then((res:any) => {
-            navigation.navigation('Cadastrar');
+        api.put('/concluiTarefa', {_id: _id}).then((res:any) => {
+            console.log(res);
+            listar();
+        }).catch(() =>{
+            listar(); 
         })
     }
 
     function exclui(_id:any){
         api.post('/deletaTarefa', {_id: _id}).then((res:any) => {
-                navigation.navigation('Cadastrar');
+            console.log(res);
+            listar();
+        }).catch(() =>{
+            listar(); 
+        })
+    }
+
+    function listar(){
+        api.get('/tarefas').then((res:any) => {
+            setTarefas(res.data)
         })
     }
     
     useEffect(() => {
-        
-        api.get('/tarefas').then((res:any) => {
-            setTarefas(res.data)
-        })
+        listar();
     }, [])
 
     return(
