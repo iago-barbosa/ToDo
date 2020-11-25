@@ -33,7 +33,7 @@ function CustomDrawerComp ({navigation}: any) {
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/calendar-day.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Amanhã</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={DrawerStyle.item}>
+                <TouchableOpacity style={DrawerStyle.item}  onPress={() => navigation.navigate('EmBreve')}>
                     <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/calendar.png')}></Image>
                     <Text style={[Default.text, DrawerStyle.itemText]}>Em Breve</Text>
                 </TouchableOpacity>

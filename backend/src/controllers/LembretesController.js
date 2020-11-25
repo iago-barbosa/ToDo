@@ -8,34 +8,31 @@ module.exports = {
         return res.json(lembretes);
     },
 
+    async verLembretes(req, res){
+        const { _id} = req.params;
+        const lembretes = await Lembretes.findById(_id);
+        return res.json([lembretes]);
+    },
+
     async cadastraLembrete(req, res) {
         try {
+            
+            console.log(req.body);
+            const lembrete = await Lembretes.create(req.body);
 
-            const lembretes = await Lembretes.create(req.body);
-
-            return res.send({lembretes});
+            return res.send({lembrete});
         } catch (error) {
-            return res.status(400).send({error: 'Falha ao inserir novo lembrete', err: error})
+            return res.status(400).send({error: 'Falha ao inserir nova tarefa', err: error})
         }
     },
 
-    async deletaLembrete(req, res) {
+    async deletarLembrete(req, res) {
         try {
+            var {_id} = req.body;  
+            console.log(_id._id);
+            await Lembretes.findByIdAndRemove(_id._id);
 
-            const lembretes = await Lembretes.create(req.body);
-
-            return res.send({lembretes});
-        } catch (error) {
-            return res.status(400).send({error: 'Falha ao deletar lembrete', err: error})
-        }
-    },
-
-    async deletaLembrete(req, res) {
-        try {
-            var id = req.body.id;  
-            Lembretes.findByIdAndRemove(id).exec();  
-
-            return res.send({message: ok});
+            return res.send({message: 'ok'});
         } catch (error) {
             return res.status(400).send({error: 'Falha ao editar lembrete', err: error})
         }

@@ -5,6 +5,8 @@ const TarefasController = require("./controllers/TarefasController");
 
 routes.get('/tarefas', TarefasController.index);
 
+routes.get('/verTarefas/:_id', TarefasController.verTarefas);
+
 routes.get('/amanha', TarefasController.verAmanha);
 
 routes.get('/emBreve', TarefasController.emBreve);
@@ -19,6 +21,10 @@ const LembretesController = require("./controllers/LembretesController");
 
 routes.get('/lembretes', LembretesController.index);
 
-routes.post('/cadastralembretes', LembretesController.cadastraLembrete);
+routes.get('/verLembretes/:_id', LembretesController.verLembretes);
+
+routes.post('/cadastrarLembrete', LembretesController.cadastraLembrete);
+
+routes.post('/deletaLembrete', LembretesController.deletarLembrete);
 
 module.exports = routes;

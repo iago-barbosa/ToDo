@@ -11,6 +11,12 @@ module.exports = {
         return res.json(tarefas);
     },
 
+    async verTarefas(req, res){
+        const { _id} = req.params;
+        const tarefas = await Tarefas.findById(_id);
+        return res.json([tarefas]);
+    },
+
     async verAmanha(req, res) {
         var data = new Date();
         data.setDate(data.getDate() + 1);
@@ -50,7 +56,7 @@ module.exports = {
 
             return res.send({tarefas});
         } catch (error) {
-            return res.status(400).send({error: 'Falha ao deletar lembrete', err: error})
+            return res.status(400).send({error: 'Falha ao editar tarefa', err: error})
         }
     },
 
@@ -59,7 +65,6 @@ module.exports = {
             var {_id} = req.body;  
             console.log(_id._id);
             await Tarefas.findByIdAndRemove(_id._id);
-            console.log('aqui');
 
             return res.send({message: 'ok'});
         } catch (error) {

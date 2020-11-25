@@ -1,58 +1,84 @@
-import React, { useState } from 'react';
-import {  View, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {  View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import Default from '../../Styles/Default';
-import CadastrarLembreteStyle from '../../Styles/CadastrarLembreteCSS';
-import DatePicker from 'react-native-datepicker';
+import HomeCSS from '../../Styles/HomeCSS';
+import DrawerStyle from '../../Styles/DrawerCSS';
 import api from '../../Service/api.js';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function CadastrarLembrete ({navigation}:any) {
+export default function Home ({navigation}:any) {
 
-    const [titulo, setTitulo] = useState('');
-    const [sobre, setSobre] = useState('');
+    const [tarefas, setTarefas] = useState([]);
+    const [id, setId] = useState({});
 
-    function emBreve(){
-        var currentDate = new Date();
-        api.post('/cadastralembretes', 
-            {
-                titulo: titulo,
-                texto: sobre,
-                data: currentDate,
-                status: "1"
-            }).then((res:any) => {
-                navigation.navigate('Home')
+    function conclui(_id:any){
+        api.put('/concluiTarefa', {_id: _id}).then((res:any) => {
+            listar();
+        }).catch(() =>{
+            listar(); 
         })
     }
 
+    function exclui(_id:any){
+        api.post('/deletaTarefa', {_id: _id}).then((res:any) => {
+            listar();
+        }).catch(() =>{
+            listar(); 
+        })
+    }
+
+    function listar(){
+        api.get('/emBreve').then((res:any) => {
+            setTarefas(res.data)
+        })
+    }
+    
+    useEffect(() => {
+        listar();
+    }, [])
+
     return(
-        <View style={CadastrarLembreteStyle.main}>
-            <View style={CadastrarLembreteStyle.container}>
-                <View style={CadastrarLembreteStyle.inputItem}>
-                    <Text style={CadastrarLembreteStyle.text}>Titulo da Tarefa:</Text>
-                    <TextInput
-                        style={CadastrarLembreteStyle.input}
-                        placeholderTextColor = "#fff"
-                        placeholder="Titulo"
-                        value={titulo}
-                        onChangeText={(text) => setTitulo(text)}
-                    ></TextInput>
+        <View style={Default.main}>
+            <ScrollView style={Default.container}>
+                <View style={HomeCSS.main}>                    
+                    <View style={HomeCSS.containerTarefas}>
+                        {
+                            tarefas.map((res:any) =>{ 
+                                if(res.status == '1'){
+                                    return( 
+                                        <View style={[HomeCSS.aberto, HomeCSS.item]}>
+                                            <TouchableOpacity onPress={() => navigation.navigate('VerTarefas', {_id: res._id})}>
+                                                <Text style={Default.text}>{res.titulo}</Text>
+                                            </TouchableOpacity>
+                                            <View style={Default.status}>
+                                                <TouchableOpacity onPress={() => conclui({_id: res._id})}>
+                                                    <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/verifica.png')}></Image>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => exclui({_id: res._id})}>
+                                                    <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/trash-solid.png')}></Image>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View> 
+                                    )
+                                } else if(res.status == '2'){
+                                    return( 
+                                        <View style={[HomeCSS.concluido, HomeCSS.item]}>
+                                            <TouchableOpacity onPress={() => navigation.navigate('VerTarefas', {_id: res._id})}>
+                                                <Text style={Default.text}>{res.titulo}</Text>
+                                            </TouchableOpacity>
+                                            <View style={Default.status}>
+                                                <TouchableOpacity onPress={() => exclui({_id: res._id})}>
+                                                    <Image style={[Default.icons, DrawerStyle.icons]} source={require('../../../assets/trash-solid.png')}></Image>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View> 
+                                    )
+                                }
+                            })
+                        }
+                    </View>
                 </View>
-
-                <View style={CadastrarLembreteStyle.inputItem}>
-                    <Text style={CadastrarLembreteStyle.text}>Conteudo da tarefa:</Text>
-                    <TextInput
-                        placeholder="Conteudo"
-                        multiline={true}
-                        placeholderTextColor = "#fff"
-                        value={sobre}
-                        style={[CadastrarLembreteStyle.input, {height: Math.max(35, 95)}]}
-                        onChangeText={(text) => setSobre(text)}
-                    ></TextInput>
-                </View>
-
-                <TouchableOpacity style={CadastrarLembreteStyle.button}>
-                    <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>Cadastrar</Text>
-                </TouchableOpacity>
-            </View>
+            </ScrollView>
         </View>
     );
 }

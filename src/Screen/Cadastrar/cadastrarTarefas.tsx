@@ -13,6 +13,7 @@ export default function CadastrarTarefa ({navigation}:any) {
     var current_date = new Date();
 
     function cadastraTarefa(){
+        console.log('aqui');
         api.post('/cadastratarefas', 
             {
                 titulo: titulo,
@@ -24,7 +25,7 @@ export default function CadastrarTarefa ({navigation}:any) {
                 navigation.navigate('Home')
         })
     }
-
+ 
     return(
         <View style={CadastrarLembreteStyle.main}>
             <View style={CadastrarLembreteStyle.container}>

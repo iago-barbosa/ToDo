@@ -29,10 +29,10 @@ const HomeStyle = StyleSheet.create({
         borderBottomWidth: 1
     },
     aberto: {
-        backgroundColor: '#0053a0'
+        backgroundColor: '#00c1c5'
     },
     concluido: {
-        backgroundColor: '#00a000'
+        backgroundColor: '#47d147'
     }
 });
 

@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import {  View, Text, TextInput, TouchableOpacity} from 'react-native';
 import Default from '../../Styles/Default';
 import CadastrarLembreteStyle from '../../Styles/CadastrarLembreteCSS';
-import DatePicker from 'react-native-datepicker';
 import api from '../../Service/api.js';
-
-export default function CadastrarLembrete ({navigation}) {
+ 
+export default function CadastrarLembrete ({navigation}:any) {
 
     const [titulo, setTitulo] = useState('');
     const [sobre, setSobre] = useState('');
 
     function cadastraLembrete(){
         var currentDate = new Date();
-        api.post('/cadastralembretes', 
+        api.post('/cadastrarLembrete', 
             {
                 titulo: titulo,
                 texto: sobre,
-                data: currentDate,
+                dataCriacao: currentDate,
                 status: "1"
             }).then((res:any) => {
                 navigation.navigate('Home')
@@ -27,7 +26,7 @@ export default function CadastrarLembrete ({navigation}) {
         <View style={CadastrarLembreteStyle.main}>
             <View style={CadastrarLembreteStyle.container}>
                 <View style={CadastrarLembreteStyle.inputItem}>
-                    <Text style={CadastrarLembreteStyle.text}>Titulo da Tarefa:</Text>
+                    <Text style={CadastrarLembreteStyle.text}>Titulo do Lembrete:</Text>
                     <TextInput
                         style={CadastrarLembreteStyle.input}
                         placeholderTextColor = "#fff"
@@ -38,7 +37,7 @@ export default function CadastrarLembrete ({navigation}) {
                 </View>
 
                 <View style={CadastrarLembreteStyle.inputItem}>
-                    <Text style={CadastrarLembreteStyle.text}>Conteudo da tarefa:</Text>
+                    <Text style={CadastrarLembreteStyle.text}>Conteudo do lembrete:</Text>
                     <TextInput
                         placeholder="Conteudo"
                         multiline={true}

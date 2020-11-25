@@ -6,7 +6,7 @@ import CadastrarStyle from '../../Styles/CadastrarCSS';
 export default function Cadastrar ({ navigation}: any) {
     return(
         <View style={[Default.main, CadastrarStyle.main]}>
-            <TouchableOpacity style={CadastrarStyle.button} onPress={() => navigation.navigate('Lembrete')}>
+            <TouchableOpacity style={CadastrarStyle.button} onPress={() => navigation.navigate('CadastrarLembrete')}>
                 <Text style={CadastrarStyle.text}>Adicionar Lembrete</Text>
             </TouchableOpacity>
 
